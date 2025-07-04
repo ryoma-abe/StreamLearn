@@ -7,7 +7,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="flex items-center px-6 py-4 bg-white shadow-sm">
+    <header className="flex items-center px-6 py-4 bg-white shadow-sm sticky top-0 z-50">
       <h1 className="text-2xl font-bold text-gray-900">
         <Link href="/">StreamLearn</Link>
       </h1>

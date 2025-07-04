@@ -37,7 +37,7 @@ export async function signup(formData: FormData) {
   const { data: authData, error } = await supabase.auth.signUp(data);
 
   if (error) {
-    alert(error.message);
+    redirect("/error");
   }
 
   // Create user record in database
