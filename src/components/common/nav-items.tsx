@@ -5,8 +5,16 @@ import { usePathname } from "next/navigation";
 export default function NavItems() {
   const pathname = usePathname();
   return (
-    <nav className="flex-1 flex justify-center">
+    <nav>
       <ul className="flex items-center space-x-4">
+        <li>
+          <Link
+            href="/"
+            className={`${pathname === "/" ? "underline" : ""} p-4`}
+          >
+            トップ
+          </Link>
+        </li>
         <li>
           <Link
             href="/courses"
@@ -15,15 +23,6 @@ export default function NavItems() {
             コース一覧
           </Link>
         </li>
-        <li>
-          <Link
-            href="/dashboard"
-            className={`${pathname === "/dashboard" ? "underline" : ""} p-4`}
-          >
-            ダッシュボード
-          </Link>
-        </li>
-        {/* アカウントページ */}
         <li>
           <Link
             href="/account"
