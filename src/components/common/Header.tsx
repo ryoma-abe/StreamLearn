@@ -13,8 +13,11 @@ export default function Header() {
       </h1>
       <nav className="flex-1 flex justify-center">
         <ul className="flex items-center space-x-4">
-          <li className={`${pathname === "/courses" ? "underline" : ""}`}>
-            <Link href="/courses" className="p-4">
+          <li>
+            <Link
+              href="/courses"
+              className={`${pathname === "/courses" ? "underline" : ""} p-4`}
+            >
               コース一覧
             </Link>
           </li>
