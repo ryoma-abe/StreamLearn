@@ -21,6 +21,14 @@ export default function Header() {
               コース一覧
             </Link>
           </li>
+          <li>
+            <Link
+              href="/dashboard"
+              className={`${pathname === "/dashboard" ? "underline" : ""} p-4`}
+            >
+              ダッシュボード
+            </Link>
+          </li>
         </ul>
       </nav>
       <div className="flex items-center space-x-2">
