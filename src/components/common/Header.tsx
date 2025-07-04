@@ -7,7 +7,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="flex items-center px-6 py-4 bg-white shadow-sm">
+    <header className="flex items-center px-6 py-4 bg-white shadow-sm sticky top-0 z-50">
       <h1 className="text-2xl font-bold text-gray-900">
         <Link href="/">StreamLearn</Link>
       </h1>
@@ -29,11 +29,24 @@ export default function Header() {
               ダッシュボード
             </Link>
           </li>
+          {/* アカウントページ */}
+          <li>
+            <Link
+              href="/account"
+              className={`${pathname === "/account" ? "underline" : ""} p-4`}
+            >
+              アカウント
+            </Link>
+          </li>
         </ul>
       </nav>
       <div className="flex items-center space-x-2">
-        <Button variant="secondary">ログイン</Button>
-        <Button>新規登録</Button>
+        <Button variant="secondary">
+          <Link href="/login">ログイン</Link>
+        </Button>
+        <Button>
+          <Link href="/signup">新規登録</Link>
+        </Button>
       </div>
     </header>
   );
