@@ -19,33 +19,46 @@ export default async function Account() {
     : null;
 
   return (
-    <div>
-      <SectionHeader title="ダッシュボード" />
-      <p>{dbUser?.role}</p>
-      {/* 講師側のコンテンツ */}
-      {dbUser?.role === "INSTRUCTOR" ? (
-        <div className="mt-10">
-          <InstructorContent />
-        </div>
-      ) : (
-        <div className="mt-10">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            受講中のコース
-          </h3>
-        </div>
-      )}
-      {/* 共通のコンテンツ */}
-      <div className="pt-4 max-w-sm">
-        <form action="/auth/signout" method="post">
-          <button
-            className="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors"
-            type="submit"
-          >
-            Sign out
-          </button>
-        </form>
+    <div className="space-y-8">
+      <div>
+        <SectionHeader title="ダッシュボード" />
+        <p className="text-muted-foreground mt-2">
+          {dbUser?.role === "INSTRUCTOR" ? "講師アカウント" : "受講者アカウント"}
+        </p>
       </div>
-      <AccountForm user={user} />
+
+      <div className="grid gap-8 md:grid-cols-3">
+        <div className="md:col-span-2 space-y-6">
+          {dbUser?.role === "INSTRUCTOR" ? (
+            <InstructorContent />
+          ) : (
+            <div className="rounded-lg border p-6">
+              <h3 className="mb-4">受講中のコース</h3>
+              <p className="text-muted-foreground text-sm">
+                現在受講中のコースはありません
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="space-y-6">
+          <div className="rounded-lg border p-6">
+            <h3 className="mb-4">アカウント情報</h3>
+            <AccountForm user={user} />
+          </div>
+          
+          <div className="rounded-lg border p-6">
+            <form action="/auth/signout" method="post">
+              <button
+                className="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors"
+                type="submit"
+              >
+                サインアウト
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

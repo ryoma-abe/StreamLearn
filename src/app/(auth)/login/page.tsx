@@ -8,31 +8,32 @@ export default function AuthPage() {
   const [loginState, loginAction] = useActionState<State, FormData>(login, {});
 
   return (
-    <div className="mx-auto max-w-md space-y-10">
-      {/* ログインフォーム */}
-      <form action={loginAction} className="space-y-4">
-        <h2 className="text-xl font-bold">ログイン</h2>
+    <div className="mx-auto max-w-md">
+      <form action={loginAction} className="space-y-6 rounded-lg border p-8 bg-card">
+        <h1 className="text-center">ログイン</h1>
 
-        <input
-          name="email"
-          type="email"
-          placeholder="メール"
-          required
-          className="w-full border p-2"
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="パスワード"
-          required
-          className="w-full border p-2"
-        />
+        <div className="space-y-4">
+          <input
+            name="email"
+            type="email"
+            placeholder="メール"
+            required
+            className="w-full border p-3 rounded-md"
+          />
+          <input
+            name="password"
+            type="password"
+            placeholder="パスワード"
+            required
+            className="w-full border p-3 rounded-md"
+          />
+        </div>
 
         {loginState.error && (
-          <p className="text-red-500 text-sm">{loginState.error}</p>
+          <p className="text-red-500 text-sm text-center">{loginState.error}</p>
         )}
 
-        <Button type="submit" className="w-full bg-indigo-600 text-white">
+        <Button type="submit" className="w-full">
           ログイン
         </Button>
       </form>

@@ -7,42 +7,42 @@ import Link from "next/link";
 export default function CreateAccountPage() {
   const [signupState, signupAction] = useActionState(signup, {});
   return (
-    <div className="mx-auto max-w-md space-y-10">
-      {/* サインアップフォーム */}
+    <div className="mx-auto max-w-md">
       {signupState.success ? (
-        <div className="text-center space-y-4">
-          <p className="text-green-600 text-base font-medium">
+        <div className="text-center space-y-6 rounded-lg border p-8 bg-card">
+          <p className="text-green-600 font-medium">
             登録したメールアドレスに確認メールを送信しました。
           </p>
-          {/* ログインページへのリンク */}
-          <Button className="w-full bg-indigo-600 text-white hover:bg-indigo-700">
+          <Button className="w-full" asChild>
             <Link href="/login">ログイン</Link>
           </Button>
         </div>
       ) : (
-        <form action={signupAction} className="space-y-4">
-          <h2 className="text-xl font-bold">新規登録</h2>
+        <form action={signupAction} className="space-y-6 rounded-lg border p-8 bg-card">
+          <h1 className="text-center">新規登録</h1>
 
-          <input
-            name="email"
-            type="email"
-            placeholder="メール"
-            required
-            className="w-full border p-2"
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="パスワード"
-            required
-            className="w-full border p-2"
-          />
+          <div className="space-y-4">
+            <input
+              name="email"
+              type="email"
+              placeholder="メール"
+              required
+              className="w-full border p-3 rounded-md"
+            />
+            <input
+              name="password"
+              type="password"
+              placeholder="パスワード"
+              required
+              className="w-full border p-3 rounded-md"
+            />
+          </div>
 
           {signupState.error && (
-            <p className="text-red-500 text-sm">{signupState.error}</p>
+            <p className="text-red-500 text-sm text-center">{signupState.error}</p>
           )}
 
-          <Button type="submit" className="w-full bg-green-600 text-white">
+          <Button type="submit" className="w-full">
             登録
           </Button>
         </form>
