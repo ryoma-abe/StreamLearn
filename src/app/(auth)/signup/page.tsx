@@ -1,6 +1,6 @@
 "use client";
 import { useActionState } from "react";
-import { signup } from "../login/actions";
+import { signup } from "../signup/actions";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 

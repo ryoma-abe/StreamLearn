@@ -35,7 +35,7 @@ export default async function Account() {
         </div>
       )}
       {/* 共通のコンテンツ */}
-      <div className="pt-4">
+      <div className="pt-4 max-w-sm">
         <form action="/auth/signout" method="post">
           <button
             className="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors"
