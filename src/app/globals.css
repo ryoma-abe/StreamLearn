@@ -118,32 +118,23 @@
     @apply bg-background text-foreground antialiased;
   }
   
-  /* Typography */
+  /* 見出しのスタイル */
   h1 {
-    @apply text-4xl font-bold tracking-tight lg:text-5xl;
+    @apply text-3xl font-bold;
   }
   
   h2 {
-    @apply text-3xl font-semibold tracking-tight lg:text-4xl;
+    @apply text-2xl font-bold;
   }
   
   h3 {
-    @apply text-2xl font-semibold tracking-tight lg:text-3xl;
+    @apply text-lg font-semibold;
   }
   
-  h4 {
-    @apply text-xl font-semibold tracking-tight lg:text-2xl;
-  }
-  
-  /* Form elements */
+  /* 入力要素の基本スタイル */
   input[type="text"],
   input[type="email"],
-  input[type="password"],
-  textarea {
-    @apply w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm transition-colors placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
-  }
-  
-  label {
-    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  input[type="password"] {
+    @apply rounded-md transition-colors;
   }
 }

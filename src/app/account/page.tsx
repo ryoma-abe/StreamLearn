@@ -20,51 +20,43 @@ export default async function Account() {
 
   return (
     <div className="space-y-8">
-      {/* ヘッダーセクション */}
-      <div className="border-b pb-6">
-        <h1 className="text-3xl font-bold">ダッシュボード</h1>
-        <p className="mt-2 text-muted-foreground">
+      <div>
+        <SectionHeader title="ダッシュボード" />
+        <p className="text-muted-foreground mt-2">
           {dbUser?.role === "INSTRUCTOR" ? "講師アカウント" : "受講者アカウント"}
         </p>
       </div>
 
-      {/* メインコンテンツ */}
-      <div className="grid gap-8 lg:grid-cols-3">
-        {/* 左側：メインコンテンツ */}
-        <div className="lg:col-span-2 space-y-8">
+      <div className="grid gap-8 md:grid-cols-3">
+        <div className="md:col-span-2 space-y-6">
           {dbUser?.role === "INSTRUCTOR" ? (
             <InstructorContent />
           ) : (
-            <section>
-              <h2 className="mb-4 text-xl font-semibold">受講中のコース</h2>
-              <div className="rounded-lg border bg-muted/30 p-8 text-center">
-                <p className="text-muted-foreground">
-                  現在受講中のコースはありません
-                </p>
-              </div>
-            </section>
+            <div className="rounded-lg border p-6">
+              <h3 className="mb-4">受講中のコース</h3>
+              <p className="text-muted-foreground text-sm">
+                現在受講中のコースはありません
+              </p>
+            </div>
           )}
         </div>
 
-        {/* 右側：サイドバー */}
         <div className="space-y-6">
-          {/* アカウント情報 */}
-          <section className="rounded-lg border p-6">
-            <h3 className="mb-4 font-semibold">アカウント情報</h3>
+          <div className="rounded-lg border p-6">
+            <h3 className="mb-4">アカウント情報</h3>
             <AccountForm user={user} />
-          </section>
-
-          {/* サインアウト */}
-          <section className="rounded-lg border p-6">
+          </div>
+          
+          <div className="rounded-lg border p-6">
             <form action="/auth/signout" method="post">
               <button
-                className="w-full rounded-lg bg-destructive px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-destructive/90"
+                className="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors"
                 type="submit"
               >
                 サインアウト
               </button>
             </form>
-          </section>
+          </div>
         </div>
       </div>
     </div>

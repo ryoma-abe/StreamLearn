@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npx prisma:*)",
       "Bash(npx supabase:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
