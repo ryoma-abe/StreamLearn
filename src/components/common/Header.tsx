@@ -22,7 +22,7 @@ export default async function HeaderGate() {
               <Link href="/login">ログイン</Link>
             </Button>
             <Button>
-              <Link href="/signup">新規登録</Link>
+              <Link href="/create-account">新規登録</Link>
             </Button>
           </div>
         )}
