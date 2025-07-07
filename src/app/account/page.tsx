@@ -23,7 +23,9 @@ export default async function Account() {
       <div>
         <SectionHeader title="ダッシュボード" />
         <p className="text-muted-foreground mt-2">
-          {dbUser?.role === "INSTRUCTOR" ? "講師アカウント" : "受講者アカウント"}
+          {dbUser?.role === "INSTRUCTOR"
+            ? "講師アカウント"
+            : "受講者アカウント"}
         </p>
       </div>
 
@@ -46,7 +48,7 @@ export default async function Account() {
             <h3 className="mb-4">アカウント情報</h3>
             <AccountForm user={user} />
           </div>
-          
+
           <div className="rounded-lg border p-6">
             <form action="/auth/signout" method="post">
               <button
