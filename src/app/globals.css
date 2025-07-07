@@ -115,6 +115,35 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+  
+  /* Typography */
+  h1 {
+    @apply text-4xl font-bold tracking-tight lg:text-5xl;
+  }
+  
+  h2 {
+    @apply text-3xl font-semibold tracking-tight lg:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl font-semibold tracking-tight lg:text-3xl;
+  }
+  
+  h4 {
+    @apply text-xl font-semibold tracking-tight lg:text-2xl;
+  }
+  
+  /* Form elements */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    @apply w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm transition-colors placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
+  }
+  
+  label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
   }
 }
