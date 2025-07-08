@@ -1,39 +1,31 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/utils/supabase/server";
 import { prisma } from "@/lib/prisma";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient();
+  const { title, description, price, videoUrl } = await request.json();
+  const instructor = await prisma.user.findUnique({
+    where: {
+      email: "test@test.com",
+    },
+  });
 
-  // 認証チェック
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  try {
-    const body = await request.json();
-    const { title, description, price, videoUrl, instructorId } = body;
-
-    // コースを作成
-    const course = await prisma.course.create({
-      data: {
-        title,
-        description,
-        price,
-        videoUrl,
-        instructorId,
-      },
-    });
-
-    return NextResponse.json(course);
-  } catch (error) {
-    console.error("Course creation error:", error);
+  if (!instructor) {
     return NextResponse.json(
-      { error: "Failed to create course" },
-      { status: 500 }
+      { error: "Instructor not found" },
+      { status: 404 }
     );
   }
+  const instructorId = instructor.id;
+
+  await prisma.course.create({
+    data: {
+      title,
+      description,
+      videoUrl,
+      price,
+      instructor: {
+        connect: { id: instructorId },
+      },
+    },
+  });
 }
