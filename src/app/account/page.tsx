@@ -2,7 +2,7 @@ import SectionHeader from "@/components/common/section-header";
 import AccountForm from "./account-form";
 import { createClient } from "@/utils/supabase/server";
 import { prisma } from "@/lib/prisma";
-import InstructorContent from "@/components/instructor-content";
+import InstructorContent from "@/components/instructor/instructor-content";
 
 export default async function Account() {
   const supabase = await createClient();
