@@ -7,11 +7,12 @@ import InstructorContent from "@/components/instructor/instructor-content";
 export default async function Account() {
   const supabase = await createClient();
 
+  // ここで現在ログインしているユーザーの情報を取得
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Prismaからユーザー情報を取得（emailで検索）
+  // Prismaとログインユーザーの紐付け
   const dbUser = user
     ? await prisma.user.findUnique({
         where: { email: user.email! },
