@@ -42,7 +42,7 @@ export default function InstructorContent() {
                 </button>
               </div>
 
-              <form className="space-y-4">
+              <form method="POST" action="/api/courses" className="space-y-4">
                 <div>
                   <label
                     htmlFor="title"
@@ -74,13 +74,27 @@ export default function InstructorContent() {
                     placeholder="教材の説明を入力"
                   />
                 </div>
-
+                <div>
+                  <label
+                    htmlFor="price"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    価格(円)
+                  </label>
+                  <input
+                    type="text"
+                    id="price"
+                    name="price"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="価格"
+                  />
+                </div>
                 <div>
                   <label
                     htmlFor="video"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    動画
+                    動画URL
                   </label>
                   <input
                     type="url"
