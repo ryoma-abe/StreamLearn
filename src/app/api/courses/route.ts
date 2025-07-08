@@ -58,7 +58,8 @@ export async function POST(request: NextRequest) {
     { status: 201 }
   );
 }
-// 教材取得(全ての)
+
+// 教材取得
 export async function GET() {
   const courses = await prisma.course.findMany({
     orderBy: { createdAt: "desc" }, // 新しい順
