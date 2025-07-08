@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
+// 講師の教材投稿→DB登録
 export async function POST(request: NextRequest) {
   const supabase = await createClient();
   const {
@@ -56,4 +57,11 @@ export async function POST(request: NextRequest) {
     { message: "Course created successfully" },
     { status: 201 }
   );
+}
+// 教材取得(全ての)
+export async function GET() {
+  const courses = await prisma.course.findMany({
+    orderBy: { createdAt: "desc" }, // 新しい順
+  });
+  return NextResponse.json(courses);
 }

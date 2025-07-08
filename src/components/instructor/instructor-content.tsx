@@ -8,6 +8,8 @@ export default function InstructorContent() {
   const modalOpen = () => {
     setIsOpen(true);
   };
+
+  // モーダルのフォーム送信
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); // ページリロード防止
 
@@ -22,6 +24,8 @@ export default function InstructorContent() {
       setIsOpen(false);
     }
   }
+  // 教材取得
+  
   return (
     <div className="space-y-6">
       <div className="rounded-lg border p-6">
