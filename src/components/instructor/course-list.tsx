@@ -19,11 +19,11 @@ export default function CourseList() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('/api/courses');
+        const response = await fetch("/api/courses");
         const data = await response.json();
         setCourses(data);
       } catch (error) {
-        console.error('Error fetching courses:', error);
+        console.error("Error fetching courses:", error);
       } finally {
         setLoading(false);
       }
