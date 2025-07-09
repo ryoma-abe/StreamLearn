@@ -2,12 +2,15 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import InstructorModal from "./instructor-modal";
+import CourseList from "./course-list";
 
 export default function InstructorContent() {
   const [isOpen, setIsOpen] = useState(false);
   const modalOpen = () => {
     setIsOpen(true);
   };
+
+  // モーダルのフォーム送信
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); // ページリロード防止
 
@@ -22,6 +25,7 @@ export default function InstructorContent() {
       setIsOpen(false);
     }
   }
+
   return (
     <div className="space-y-6">
       <div className="rounded-lg border p-6">
@@ -32,9 +36,7 @@ export default function InstructorContent() {
 
         <div className="space-y-2">
           <h4 className="font-medium">教材一覧</h4>
-          <p className="text-muted-foreground text-sm">
-            まだ教材を投稿していません
-          </p>
+          <CourseList />
         </div>
 
         {/* モーダル */}
