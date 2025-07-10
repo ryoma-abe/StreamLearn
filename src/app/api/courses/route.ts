@@ -61,8 +61,24 @@ export async function POST(request: NextRequest) {
 
 // 教材取得
 export async function GET() {
-  const courses = await prisma.course.findMany({
-    orderBy: { createdAt: "desc" }, // 新しい順
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const myCourses = await prisma.course.findMany({
+    where: {
+      instructor: {
+        email: user?.email,
+      },
+    },
+    orderBy: { createdAt: "desc" },
   });
-  return NextResponse.json(courses);
+
+  return NextResponse.json(myCourses);
 }
