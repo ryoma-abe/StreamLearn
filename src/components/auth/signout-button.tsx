@@ -1,9 +1,8 @@
 "use client";
-
 import { useState } from "react";
 import LoadingSpinner from "../common/LoadingSpinner";
 
-export default function SignoutButton() {
+export default function SigninOutButton() {
   const [loading, setLoading] = useState(false);
   return (
     <form
