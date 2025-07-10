@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 interface Course {
   id: string;
@@ -32,7 +33,7 @@ export default function CourseList() {
     fetchCourses();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div>
