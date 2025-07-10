@@ -3,13 +3,20 @@
 import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { login, type State } from "./actions";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 
 export default function AuthPage() {
-  const [loginState, loginAction] = useActionState<State, FormData>(login, {});
+  const [loginState, loginAction, loading] = useActionState<State, FormData>(
+    login,
+    {}
+  );
 
   return (
     <div className="mx-auto max-w-md">
-      <form action={loginAction} className="space-y-6 rounded-lg border p-8 bg-card">
+      <form
+        action={loginAction}
+        className="space-y-6 rounded-lg border p-8 bg-card"
+      >
         <h1 className="text-center">ログイン</h1>
 
         <div className="space-y-4">
@@ -34,7 +41,7 @@ export default function AuthPage() {
         )}
 
         <Button type="submit" className="w-full">
-          ログイン
+          {loading ? <LoadingSpinner /> : "ログイン"}
         </Button>
       </form>
     </div>
