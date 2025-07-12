@@ -1,12 +1,5 @@
 "use client";
-import { useState } from "react";
-import { type User } from "@supabase/supabase-js";
-
-export default function AccountForm({ user }: { user: User | null }) {
-  const [fullname, setFullname] = useState<string | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
-  const [website, setWebsite] = useState<string | null>(null);
-
+export default function AccountForm() {
   return (
     <div className="rounded-lg border p-6">
       <h3 className="mb-4">アカウント情報</h3>
@@ -21,57 +14,24 @@ export default function AccountForm({ user }: { user: User | null }) {
           <input
             id="email"
             type="text"
-            value={user?.email}
+            value={"メールアドレス"}
             disabled
             className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
           />
         </div>
-
         <div className="space-y-2">
           <label
-            htmlFor="fullName"
+            htmlFor="email"
             className="block text-sm font-medium text-gray-700"
           >
-            Full Name
+            Email
           </label>
           <input
-            id="fullName"
+            id="email"
             type="text"
-            value={fullname || ""}
-            onChange={(e) => setFullname(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label
-            htmlFor="username"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Username
-          </label>
-          <input
-            id="username"
-            type="text"
-            value={username || ""}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label
-            htmlFor="website"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Website
-          </label>
-          <input
-            id="website"
-            type="url"
-            value={website || ""}
-            onChange={(e) => setWebsite(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={"メールアドレス"}
+            disabled
+            className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
           />
         </div>
       </div>
