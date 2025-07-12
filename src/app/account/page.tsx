@@ -23,7 +23,7 @@ export default async function Account() {
   return (
     <div className="space-y-8">
       <div>
-        <SectionHeader title="ダッシュボード" />
+        <SectionHeader title="アカウントページ" />
         <p className="text-muted-foreground mt-2">
           {dbUser?.role === "INSTRUCTOR"
             ? "講師アカウント"
@@ -46,14 +46,8 @@ export default async function Account() {
         </div>
 
         <div className="space-y-6">
-          <div className="rounded-lg border p-6">
-            <h3 className="mb-4">アカウント情報</h3>
-            <AccountForm user={user} />
-          </div>
-
-          <div className="rounded-lg border p-6">
-            <SigninOutButton />
-          </div>
+          <AccountForm user={user} />
+          <SigninOutButton />
         </div>
       </div>
     </div>
