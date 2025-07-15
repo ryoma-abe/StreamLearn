@@ -15,7 +15,6 @@ export default async function AccountForm() {
         where: { email: user.email! },
       })
     : null;
-  console.log(dbUser);
 
   return (
     <div className="rounded-lg border p-6">
