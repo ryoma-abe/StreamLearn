@@ -57,7 +57,7 @@ export default async function CourseDetailPage({
             <p className="text-gray-700 leading-relaxed mb-6">
               {course.description}
             </p>
-            
+
             <div className="border-t pt-6">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-lg font-medium text-gray-900">価格</span>
@@ -65,7 +65,7 @@ export default async function CourseDetailPage({
                   ¥{course.price.toLocaleString()}
                 </span>
               </div>
-              
+
               <div className="flex justify-center">
                 <Button className="w-full sm:w-auto px-8 py-3 text-lg font-semibold">
                   購入する
