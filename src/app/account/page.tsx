@@ -46,7 +46,7 @@ export default async function Account() {
         </div>
 
         <div className="space-y-6">
-          <AccountForm user={user} />
+          <AccountForm/>
           <SigninOutButton />
         </div>
       </div>

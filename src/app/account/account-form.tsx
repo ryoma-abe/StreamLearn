@@ -1,11 +1,21 @@
-"use client";
-import { useState } from "react";
-import { type User } from "@supabase/supabase-js";
+import { prisma } from "@/lib/prisma";
+import { createClient } from "@/utils/supabase/server";
 
-export default function AccountForm({ user }: { user: User | null }) {
-  const [fullname, setFullname] = useState<string | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
-  const [website, setWebsite] = useState<string | null>(null);
+export default async function AccountForm() {
+  const supabase = await createClient();
+
+  // ここで現在ログインしているユーザーの情報を取得
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Prismaとログインユーザーの紐付け
+  const dbUser = user
+    ? await prisma.user.findUnique({
+        where: { email: user.email! },
+      })
+    : null;
+  console.log(dbUser);
 
   return (
     <div className="rounded-lg border p-6">
@@ -21,57 +31,24 @@ export default function AccountForm({ user }: { user: User | null }) {
           <input
             id="email"
             type="text"
-            value={user?.email}
+            value={dbUser?.email}
             disabled
             className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
           />
         </div>
-
         <div className="space-y-2">
           <label
-            htmlFor="fullName"
+            htmlFor="name"
             className="block text-sm font-medium text-gray-700"
           >
-            Full Name
+            名前
           </label>
           <input
-            id="fullName"
+            id="name"
             type="text"
-            value={fullname || ""}
-            onChange={(e) => setFullname(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label
-            htmlFor="username"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Username
-          </label>
-          <input
-            id="username"
-            type="text"
-            value={username || ""}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label
-            htmlFor="website"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Website
-          </label>
-          <input
-            id="website"
-            type="url"
-            value={website || ""}
-            onChange={(e) => setWebsite(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={dbUser?.name ?? ""}
+            disabled
+            className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50"
           />
         </div>
       </div>
