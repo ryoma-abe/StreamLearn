@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { prisma } from "@/lib/prisma";
 import InstructorContent from "@/components/instructor/instructor-content";
 import SigninOutButton from "@/components/auth/signout-button";
+import UserContent from "@/components/user/user-content";
 
 export default async function Account() {
   const supabase = await createClient();
@@ -39,14 +40,14 @@ export default async function Account() {
             <div className="rounded-lg border p-6">
               <h3 className="mb-4">受講中のコース</h3>
               <p className="text-muted-foreground text-sm">
-                現在受講中のコースはありません
+                <UserContent />
               </p>
             </div>
           )}
         </div>
 
         <div className="space-y-6">
-          <AccountForm/>
+          <AccountForm />
           <SigninOutButton />
         </div>
       </div>
