@@ -39,9 +39,9 @@ export default async function Account() {
           ) : (
             <div className="rounded-lg border p-6">
               <h3 className="mb-4">受講中のコース</h3>
-              <p className="text-muted-foreground text-sm">
+              <div className="text-muted-foreground text-sm">
                 <UserContent />
-              </p>
+              </div>
             </div>
           )}
         </div>
