@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
 
 export default async function CourseDetailPage({
@@ -53,17 +54,23 @@ export default async function CourseDetailPage({
             <h2 className="text-xl font-semibold mb-4 text-gray-900">
               コースについて
             </h2>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed mb-6">
               {course.description}
             </p>
-          </div>
-
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border p-6">
-            <div className="flex items-center justify-between">
-              <span className="text-lg font-medium text-gray-900">価格</span>
-              <span className="text-2xl font-bold text-indigo-600">
-                ¥{course.price.toLocaleString()}
-              </span>
+            
+            <div className="border-t pt-6">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-lg font-medium text-gray-900">価格</span>
+                <span className="text-2xl font-bold text-indigo-600">
+                  ¥{course.price.toLocaleString()}
+                </span>
+              </div>
+              
+              <div className="flex justify-center">
+                <Button className="w-full sm:w-auto px-8 py-3 text-lg font-semibold">
+                  購入する
+                </Button>
+              </div>
             </div>
           </div>
         </div>
