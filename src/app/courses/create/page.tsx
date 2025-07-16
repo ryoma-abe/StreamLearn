@@ -6,18 +6,14 @@ import { useState } from "react";
 import Markdown from "react-markdown";
 
 export default function CreateCoursePage() {
-  // マークダウンの保持
   const [markdown, setMarkdown] = useState("");
-
-  // 送信完了メッセージ
   const [message, setMessage] = useState(false);
-  // ローディング
   const [loading, setLoading] = useState(false);
 
   // 登録処理
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
-    const form = event.currentTarget; // 非同期処理の前に保存
+    const form = event.currentTarget;
     event.preventDefault(); // ページリロード防止
 
     const formData = new FormData(form);
@@ -32,6 +28,9 @@ export default function CreateCoursePage() {
       form.reset();
       setMarkdown("");
     }
+    setTimeout(() => {
+      setMessage(false);
+    }, 5000);
   }
 
   return (
