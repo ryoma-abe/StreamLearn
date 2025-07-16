@@ -56,11 +56,6 @@ export default function CreateCoursePage() {
             value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
           />
-
-          <h2>プレビュー</h2>
-          <div className="border border-gray-200 rounded-md p-4 bg-gray-50 prose prose-sm max-w-none">
-            <Markdown>{markdown}</Markdown>
-          </div>
         </div>
         <div>
           <label
@@ -92,9 +87,18 @@ export default function CreateCoursePage() {
           />
         </div>
 
-        <div className="pt-4">
-          <Button type="submit">投稿</Button>
+        <div className="pt-4 flex justify-center">
+          <Button type="submit" className="max-w-[300] w-full">
+            投稿
+          </Button>
         </div>
+        {markdown && (
+          <div className="mt-10">
+            <div className="border border-gray-200 rounded-md p-4 bg-gray-50 prose prose-sm max-w-none">
+              <Markdown>{markdown}</Markdown>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );
