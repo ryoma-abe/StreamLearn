@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
+import Markdown from "react-markdown";
 
 export default async function CourseDetailPage({
   params,
@@ -54,9 +55,9 @@ export default async function CourseDetailPage({
             <h2 className="text-xl font-semibold mb-4 text-gray-900">
               コースについて
             </h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              {course.description}
-            </p>
+            <div className="prose prose-lg max-w-none">
+              <Markdown>{course.description}</Markdown>
+            </div>
 
             <div className="border-t pt-6">
               <div className="flex items-center justify-between mb-4">

@@ -1,5 +1,8 @@
-import React from "react";
+"use client";
+
+import { useState } from "react";
 import { Button } from "../ui/button";
+import Markdown from "react-markdown";
 
 type InstructorModalProps = {
   setIsOpen: (isOpen: boolean) => void;
@@ -9,6 +12,7 @@ export default function InstructorModal({
   setIsOpen,
   handleSubmit,
 }: InstructorModalProps) {
+  const [markdown, setMarkdown] = useState("");
   return (
     <div
       onClick={() => setIsOpen(false)}
@@ -55,10 +59,17 @@ export default function InstructorModal({
             <textarea
               id="description"
               name="description"
-              rows={4}
+              placeholder="マークダウンを入力してください"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-              placeholder="教材の説明を入力"
+              rows={4}
+              value={markdown}
+              onChange={(e) => setMarkdown(e.target.value)}
             />
+
+            <h2>プレビュー</h2>
+            <div className="border border-gray-200 rounded-md p-4 bg-gray-50 prose prose-sm max-w-none">
+              <Markdown>{markdown}</Markdown>
+            </div>
           </div>
           <div>
             <label
