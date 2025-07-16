@@ -8,21 +8,32 @@ export default function CreateCoursePage() {
   // マークダウンの保持
   const [markdown, setMarkdown] = useState("");
 
+  // 送信完了メッセージ
+  const [message, setMessage] = useState(false);
+
   // 登録処理
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); // ページリロード防止
 
     const formData = new FormData(event.currentTarget);
 
-    await fetch("/api/courses", {
+    const res = await fetch("/api/courses", {
       method: "POST",
       body: formData,
     });
+    if (res.ok) {
+      setMessage(true);
+      event.currentTarget.reset();
+      setMarkdown("");
+    }
   }
 
   return (
     <div>
       <SectionHeader title="教材投稿" />
+      {message && (
+        <p className="text-center p-10 my-10 bg-green-300">送信完了しました</p>
+      )}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label
@@ -56,11 +67,6 @@ export default function CreateCoursePage() {
             value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
           />
-
-          <h2>プレビュー</h2>
-          <div className="border border-gray-200 rounded-md p-4 bg-gray-50 prose prose-sm max-w-none">
-            <Markdown>{markdown}</Markdown>
-          </div>
         </div>
         <div>
           <label
@@ -92,9 +98,18 @@ export default function CreateCoursePage() {
           />
         </div>
 
-        <div className="pt-4">
-          <Button type="submit">投稿</Button>
+        <div className="pt-4 flex justify-center">
+          <Button type="submit" className="max-w-[300] w-full">
+            投稿
+          </Button>
         </div>
+        {markdown && (
+          <div className="mt-10">
+            <div className="border border-gray-200 rounded-md p-4 bg-gray-50 prose prose-sm max-w-none">
+              <Markdown>{markdown}</Markdown>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );
