@@ -8,21 +8,32 @@ export default function CreateCoursePage() {
   // マークダウンの保持
   const [markdown, setMarkdown] = useState("");
 
+  // 送信完了メッセージ
+  const [message, setMessage] = useState(false);
+
   // 登録処理
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); // ページリロード防止
 
     const formData = new FormData(event.currentTarget);
 
-    await fetch("/api/courses", {
+    const res = await fetch("/api/courses", {
       method: "POST",
       body: formData,
     });
+    if (res.ok) {
+      setMessage(true);
+      event.currentTarget.reset();
+      setMarkdown("");
+    }
   }
 
   return (
     <div>
       <SectionHeader title="教材投稿" />
+      {message && (
+        <p className="text-center p-10 my-10 bg-green-300">送信完了しました</p>
+      )}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label
