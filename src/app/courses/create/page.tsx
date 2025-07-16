@@ -1,31 +1,36 @@
 "use client";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 import SectionHeader from "@/components/common/section-header";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Markdown from "react-markdown";
 
 export default function CreateCoursePage() {
-  // マークダウンの保持
   const [markdown, setMarkdown] = useState("");
-
-  // 送信完了メッセージ
   const [message, setMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // 登録処理
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    setLoading(true);
+    const form = event.currentTarget;
     event.preventDefault(); // ページリロード防止
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
 
     const res = await fetch("/api/courses", {
       method: "POST",
       body: formData,
     });
     if (res.ok) {
+      setLoading(false);
       setMessage(true);
-      event.currentTarget.reset();
+      form.reset();
       setMarkdown("");
     }
+    setTimeout(() => {
+      setMessage(false);
+    }, 5000);
   }
 
   return (
@@ -64,8 +69,8 @@ export default function CreateCoursePage() {
             placeholder="マークダウンを入力してください"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             rows={4}
-            value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
+            value={markdown}
           />
         </div>
         <div>
@@ -100,7 +105,7 @@ export default function CreateCoursePage() {
 
         <div className="pt-4 flex justify-center">
           <Button type="submit" className="max-w-[300] w-full">
-            投稿
+            {loading ? <LoadingSpinner /> : "投稿"}
           </Button>
         </div>
         {markdown && (
