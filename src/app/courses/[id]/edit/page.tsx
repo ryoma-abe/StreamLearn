@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
 
 export default async function EditPage({ params }: { params: { id: string } }) {
@@ -36,12 +37,7 @@ export default async function EditPage({ params }: { params: { id: string } }) {
             />
           </div>
           <div className="flex justify-end">
-            <button
-              type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md transition-colors"
-            >
-              更新する
-            </button>
+            <Button type="submit">更新する</Button>
           </div>
         </form>
       </div>
