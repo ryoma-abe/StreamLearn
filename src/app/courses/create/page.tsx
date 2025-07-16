@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
 import SectionHeader from "@/components/common/section-header";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -10,9 +11,12 @@ export default function CreateCoursePage() {
 
   // 送信完了メッセージ
   const [message, setMessage] = useState(false);
+  // ローディング
+  const [loading, setLoading] = useState(false);
 
   // 登録処理
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    setLoading(true);
     event.preventDefault(); // ページリロード防止
 
     const formData = new FormData(event.currentTarget);
@@ -22,6 +26,7 @@ export default function CreateCoursePage() {
       body: formData,
     });
     if (res.ok) {
+      setLoading(false);
       setMessage(true);
       event.currentTarget.reset();
       setMarkdown("");
@@ -100,7 +105,7 @@ export default function CreateCoursePage() {
 
         <div className="pt-4 flex justify-center">
           <Button type="submit" className="max-w-[300] w-full">
-            投稿
+            {loading ? <LoadingSpinner /> : "投稿"}
           </Button>
         </div>
         {markdown && (
