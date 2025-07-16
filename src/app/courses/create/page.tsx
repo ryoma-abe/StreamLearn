@@ -1,37 +1,34 @@
 "use client";
-
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Button } from "../ui/button";
 import Markdown from "react-markdown";
 
-type InstructorModalProps = {
-  setIsOpen: (isOpen: boolean) => void;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-};
-export default function InstructorModal({
-  setIsOpen,
-  handleSubmit,
-}: InstructorModalProps) {
+export default function CreateCoursePage() {
+  // マークダウンの保持
   const [markdown, setMarkdown] = useState("");
+
+  // 登録処理
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault(); // ページリロード防止
+
+    const formData = new FormData(event.currentTarget);
+
+    await fetch("/api/courses", {
+      method: "POST",
+      body: formData,
+    });
+  }
+
   return (
-    <div
-      onClick={() => setIsOpen(false)}
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
-    >
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div
         onClick={(e) => e.stopPropagation()}
         className="bg-white rounded-lg p-6 w-full max-w-md mx-4"
       >
         <div className="flex items-center justify-between mb-6">
           <h4 className="text-lg font-semibold">教材投稿</h4>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="text-gray-400 hover:text-gray-600"
-          >
-            ✕
-          </button>
+          <button className="text-gray-400 hover:text-gray-600">✕</button>
         </div>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
@@ -101,18 +98,8 @@ export default function InstructorModal({
             />
           </div>
 
-          <div className="flex gap-3 pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setIsOpen(false)}
-              className="flex-1"
-            >
-              キャンセル
-            </Button>
-            <Button type="submit" className="flex-1">
-              投稿
-            </Button>
+          <div className="pt-4">
+            <Button type="submit">投稿</Button>
           </div>
         </form>
       </div>
