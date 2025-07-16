@@ -28,7 +28,10 @@ export default function CreateCoursePage() {
     if (res.ok) {
       setLoading(false);
       setMessage(true);
-      event.currentTarget.reset();
+      // Null チェック
+      if (event.currentTarget) {
+        event.currentTarget.reset();
+      }
       setMarkdown("");
     }
   }
