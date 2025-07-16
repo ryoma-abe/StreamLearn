@@ -34,7 +34,7 @@ export default function CreateCoursePage() {
   }
 
   return (
-    <div>
+    <>
       <SectionHeader title="教材投稿" />
       {message && (
         <p className="text-center p-10 my-10 bg-green-300">送信完了しました</p>
@@ -116,6 +116,6 @@ export default function CreateCoursePage() {
           </div>
         )}
       </form>
-    </div>
+    </>
   );
 }
