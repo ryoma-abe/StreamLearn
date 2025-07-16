@@ -117,24 +117,27 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
-  
+
   /* 見出しのスタイル */
   h1 {
     @apply text-3xl font-bold;
   }
-  
+
   h2 {
     @apply text-2xl font-bold;
   }
-  
+
   h3 {
     @apply text-lg font-semibold;
   }
-  
+
   /* 入力要素の基本スタイル */
   input[type="text"],
   input[type="email"],
   input[type="password"] {
     @apply rounded-md transition-colors;
   }
+}
+button {
+  @apply cursor-pointer;
 }

@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "../common/LoadingSpinner";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 interface Course {
   id: string;
@@ -36,18 +38,30 @@ export default function CourseList() {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <div>
-      <h2>Course List</h2>
+    <div className="space-y-6">
+      <h2 className="text-xl font-bold mb-4">コース一覧</h2>
       {courses.length > 0 ? (
-        courses.map((course) => (
-          <div key={course.id}>
-            <h3>{course.title}</h3>
-            <p>{course.description}</p>
-            <p>Price: ¥{course.price}</p>
-          </div>
-        ))
+        <div className="grid gap-4 md:grid-cols-2">
+          {courses.map((course) => (
+            <div
+              key={course.id}
+              className="border rounded-lg p-4 bg-white shadow-sm flex flex-col gap-2"
+            >
+              <h3 className="text-lg font-semibold">{course.title}</h3>
+              <p className="text-gray-600">
+                価格:{" "}
+                <span className="font-bold">
+                  ¥{course.price.toLocaleString()}
+                </span>
+              </p>
+              <Button asChild>
+                <Link href={`/courses/${course.id}/edit`}>編集する</Link>
+              </Button>
+            </div>
+          ))}
+        </div>
       ) : (
-        <p>No courses found</p>
+        <p className="text-gray-500">コースが見つかりません</p>
       )}
     </div>
   );
