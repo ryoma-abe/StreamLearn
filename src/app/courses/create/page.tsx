@@ -17,9 +17,10 @@ export default function CreateCoursePage() {
   // 登録処理
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
+    const form = event.currentTarget; // 非同期処理の前に保存
     event.preventDefault(); // ページリロード防止
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
 
     const res = await fetch("/api/courses", {
       method: "POST",
@@ -28,10 +29,7 @@ export default function CreateCoursePage() {
     if (res.ok) {
       setLoading(false);
       setMessage(true);
-      // Null チェック
-      if (event.currentTarget) {
-        event.currentTarget.reset();
-      }
+      form.reset();
       setMarkdown("");
     }
   }
@@ -72,8 +70,8 @@ export default function CreateCoursePage() {
             placeholder="マークダウンを入力してください"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             rows={4}
-            value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
+            value={markdown}
           />
         </div>
         <div>
