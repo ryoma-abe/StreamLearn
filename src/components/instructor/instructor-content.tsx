@@ -10,7 +10,7 @@ export default function InstructorContent() {
     setIsOpen(true);
   };
 
-  // モーダルのフォーム送信
+  // 登録処理
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); // ページリロード防止
 
