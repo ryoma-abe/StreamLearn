@@ -13,7 +13,7 @@ export default function EditForm({ course }: EditFormProps) {
   const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // 登録処理
+  // 更新処理
   async function handleEdit(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
     const form = event.currentTarget;
