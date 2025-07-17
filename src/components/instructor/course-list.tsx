@@ -9,29 +9,34 @@ export default function CourseList() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const fetchCourses = async () => {
+    try {
+      const response = await fetch("/api/courses");
+      const data = await response.json();
+      setCourses(data);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch("/api/courses");
-        const data = await response.json();
-        setCourses(data);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchCourses();
   }, []);
 
   // 削除処理
   const deleteCourse = async (id: string) => {
-    const res = await fetch(`/api/courses/course/${id}`, {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      alert("Ok");
+    const result = confirm("本当に削除しますか？");
+    if (result) {
+      const res = await fetch(`/api/courses/course/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        alert("削除しました");
+        fetchCourses();
+      }
+    } else {
+      return;
     }
   };
   if (loading) return <LoadingSpinner />;
