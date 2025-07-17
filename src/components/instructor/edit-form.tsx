@@ -21,11 +21,17 @@ export default function EditForm({ course }: EditFormProps) {
     const form = event.currentTarget;
     event.preventDefault(); // ページリロード防止
 
-    const formData = new FormData(form);
+    const formData = {
+      title: form.title,
+      description: form.description.value,
+      price: Number(form.price.value),
+      videoUrl: form.videoUrl?.value || "",
+    };
 
-    const res = await fetch("/api/courses", {
-      method: "POST",
-      body: formData,
+    const res = await fetch(`/api/courses/${course?.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     });
     if (res.ok) {
       setLoading(false);
