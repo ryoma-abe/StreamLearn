@@ -20,19 +20,21 @@ export default function EditForm({ course }: EditFormProps) {
     setLoading(true);
     const form = event.currentTarget;
     event.preventDefault(); // ページリロード防止
+    const formData = new FormData(form);
 
     // PATCHリクエストなので、Jsonを送る
-    const formData = {
-      title: form.title,
-      description: form.description.value,
-      price: Number(form.price.value),
-      videoUrl: form.videoUrl?.value || "",
+    const data = {
+      id: formData.get("id") as string,
+      title: formData.get("title") as string,
+      description: formData.get("description") as string,
+      price: Number(formData.get("price")),
+      videoUrl: formData.get("videoUrl") as string,
     };
 
-    const res = await fetch(`/api/courses/${course?.id}`, {
+    const res = await fetch(`/api/courses/course/${data.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(data),
     });
     if (res.ok) {
       setLoading(false);
@@ -48,6 +50,7 @@ export default function EditForm({ course }: EditFormProps) {
         <p className="text-center p-10 my-10 bg-green-300">編集完了しました</p>
       )}
       <form onSubmit={handleEdit} className="space-y-4">
+        <input type="hidden" name="id" value={course?.id} />
         <div>
           <label
             htmlFor="title"
