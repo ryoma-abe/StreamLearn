@@ -4,46 +4,49 @@ import SectionHeader from "../common/section-header";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import LoadingSpinner from "../common/LoadingSpinner";
-import Markdown from "react-markdown";
 
 type EditFormProps = {
   course: Course | null;
 };
 
 export default function EditForm({ course }: EditFormProps) {
-  const [markdown, setMarkdown] = useState("");
   const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
 
   // 登録処理
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleEdit(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
     const form = event.currentTarget;
     event.preventDefault(); // ページリロード防止
 
     const formData = new FormData(form);
 
-    const res = await fetch("/api/courses", {
-      method: "POST",
-      body: formData,
+    const data = {
+      id: formData.get("id") as string,
+      title: formData.get("title") as string,
+      description: formData.get("description") as string,
+      price: Number(formData.get("price")),
+      videoUrl: formData.get("videoUrl") as string,
+    };
+
+    const res = await fetch(`/api/courses/course/${data.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
     if (res.ok) {
       setLoading(false);
       setMessage(true);
-      form.reset();
-      setMarkdown("");
     }
-    setTimeout(() => {
-      setMessage(false);
-    }, 5000);
   }
   return (
     <>
       <SectionHeader title="教材編集" />
       {message && (
-        <p className="text-center p-10 my-10 bg-green-300">送信完了しました</p>
+        <p className="text-center p-10 my-10 bg-green-300">編集完了しました</p>
       )}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleEdit} className="space-y-4">
+        <input type="hidden" name="id" value={course?.id} />
         <div>
           <label
             htmlFor="title"
@@ -111,16 +114,9 @@ export default function EditForm({ course }: EditFormProps) {
 
         <div className="pt-4 flex justify-center">
           <Button type="submit" className="max-w-[300] w-full">
-            {loading ? <LoadingSpinner /> : "投稿"}
+            {loading ? <LoadingSpinner /> : "更新する"}
           </Button>
         </div>
-        {markdown && (
-          <div className="mt-10">
-            <div className="border border-gray-200 rounded-md p-4 bg-gray-50 prose prose-sm max-w-none">
-              <Markdown>{markdown}</Markdown>
-            </div>
-          </div>
-        )}
       </form>
     </>
   );
