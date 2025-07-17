@@ -4,14 +4,12 @@ import SectionHeader from "../common/section-header";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import LoadingSpinner from "../common/LoadingSpinner";
-import Markdown from "react-markdown";
 
 type EditFormProps = {
   course: Course | null;
 };
 
 export default function EditForm({ course }: EditFormProps) {
-  const [markdown, setMarkdown] = useState("");
   const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -20,9 +18,9 @@ export default function EditForm({ course }: EditFormProps) {
     setLoading(true);
     const form = event.currentTarget;
     event.preventDefault(); // ページリロード防止
+
     const formData = new FormData(form);
 
-    // PATCHリクエストなので、Jsonを送る
     const data = {
       id: formData.get("id") as string,
       title: formData.get("title") as string,
@@ -39,8 +37,6 @@ export default function EditForm({ course }: EditFormProps) {
     if (res.ok) {
       setLoading(false);
       setMessage(true);
-      form.reset();
-      setMarkdown("");
     }
   }
   return (
@@ -121,13 +117,6 @@ export default function EditForm({ course }: EditFormProps) {
             {loading ? <LoadingSpinner /> : "更新する"}
           </Button>
         </div>
-        {markdown && (
-          <div className="mt-10">
-            <div className="border border-gray-200 rounded-md p-4 bg-gray-50 prose prose-sm max-w-none">
-              <Markdown>{markdown}</Markdown>
-            </div>
-          </div>
-        )}
       </form>
     </>
   );
