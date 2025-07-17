@@ -14,7 +14,6 @@ export default function EditForm({ course }: EditFormProps) {
   const [markdown, setMarkdown] = useState("");
   const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
-
   // 登録処理
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -73,8 +72,7 @@ export default function EditForm({ course }: EditFormProps) {
             placeholder="マークダウンを入力してください"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             rows={4}
-            onChange={(e) => setMarkdown(e.target.value)}
-            value={markdown}
+            value={course?.description}
           />
         </div>
         <div>
@@ -89,23 +87,26 @@ export default function EditForm({ course }: EditFormProps) {
             id="price"
             name="price"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="価格"
+            value={course?.price}
           />
         </div>
-        <div>
-          <label
-            htmlFor="video"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            動画URL
-          </label>
-          <input
-            type="url"
-            id="videoUrl"
-            name="videoUrl"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:mr-4 file:py-1 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-          />
-        </div>
+        {course?.videoUrl && (
+          <div>
+            <label
+              htmlFor="video"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              動画URL
+            </label>
+            <input
+              type="url"
+              id="videoUrl"
+              name="videoUrl"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:mr-4 file:py-1 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              value={course?.videoUrl}
+            />
+          </div>
+        )}
 
         <div className="pt-4 flex justify-center">
           <Button type="submit" className="max-w-[300] w-full">
