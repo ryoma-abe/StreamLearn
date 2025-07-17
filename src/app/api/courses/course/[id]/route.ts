@@ -8,10 +8,11 @@ export async function PATCH(
 ) {
   // フォームから送信されたデータ
   const body = await request.json();
+  const { id } = await params;
 
   await prisma.course.update({
     where: {
-      id: params.id,
+      id: id,
     },
     data: {
       title: body.title,
@@ -32,9 +33,11 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { id } = await params;
+  
   await prisma.course.delete({
     where: {
-      id: params.id,
+      id: id,
     },
   });
 
