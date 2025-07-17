@@ -35,6 +35,8 @@ export default function CourseList() {
     fetchCourses();
   }, []);
 
+  // 削除処理
+  const deleteCourse = () => {};
   if (loading) return <LoadingSpinner />;
 
   return (
@@ -56,6 +58,9 @@ export default function CourseList() {
               </p>
               <Button asChild>
                 <Link href={`/courses/${course.id}/edit`}>編集する</Link>
+              </Button>
+              <Button onClick={deleteCourse} variant={"secondary"}>
+                削除する
               </Button>
             </div>
           ))}
