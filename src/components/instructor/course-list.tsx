@@ -3,17 +3,7 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { Button } from "../ui/button";
 import Link from "next/link";
-
-interface Course {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  thumbnailUrl: string | null;
-  videoUrl: string | null;
-  instructorId: string;
-  createdAt: Date;
-}
+import { Course } from "@prisma/client";
 
 export default function CourseList() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -35,6 +25,8 @@ export default function CourseList() {
     fetchCourses();
   }, []);
 
+  // 削除処理
+  const deleteCourse = () => {};
   if (loading) return <LoadingSpinner />;
 
   return (
@@ -56,6 +48,9 @@ export default function CourseList() {
               </p>
               <Button asChild>
                 <Link href={`/courses/${course.id}/edit`}>編集する</Link>
+              </Button>
+              <Button onClick={deleteCourse} variant={"secondary"}>
+                削除する
               </Button>
             </div>
           ))}
