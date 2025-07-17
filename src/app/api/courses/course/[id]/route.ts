@@ -26,3 +26,20 @@ export async function PATCH(
     { status: 201 }
   );
 }
+
+// 教材の削除処理
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  await prisma.course.delete({
+    where: {
+      id: params.id,
+    },
+  });
+
+  return NextResponse.json(
+    { message: "Course created successfully" },
+    { status: 200 }
+  );
+}
