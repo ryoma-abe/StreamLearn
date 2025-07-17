@@ -1,15 +1,12 @@
 import EditForm from "@/components/instructor/edit-form";
-import { prisma } from "@/lib/prisma";
+import { getCourseById } from "@/lib/course";
 
 export default async function EditCoursePage({
   params,
 }: {
   params: { id: string };
 }) {
-  // 選択された教材を取得
-  const course = await prisma.course.findUnique({
-    where: { id: params.id },
-  });
+  const course = await getCourseById(params.id);
 
   return <EditForm course={course} />;
 }
