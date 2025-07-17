@@ -14,6 +14,7 @@ export default function EditForm({ course }: EditFormProps) {
   const [markdown, setMarkdown] = useState("");
   const [message, setMessage] = useState(false);
   const [loading, setLoading] = useState(false);
+
   // 登録処理
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -55,7 +56,7 @@ export default function EditForm({ course }: EditFormProps) {
             id="title"
             name="title"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            value={course?.title}
+            defaultValue={course?.title}
           />
         </div>
 
@@ -72,7 +73,7 @@ export default function EditForm({ course }: EditFormProps) {
             placeholder="マークダウンを入力してください"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             rows={4}
-            value={course?.description}
+            defaultValue={course?.description}
           />
         </div>
         <div>
@@ -87,7 +88,7 @@ export default function EditForm({ course }: EditFormProps) {
             id="price"
             name="price"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            value={course?.price}
+            defaultValue={course?.price}
           />
         </div>
         {course?.videoUrl && (
@@ -103,7 +104,7 @@ export default function EditForm({ course }: EditFormProps) {
               id="videoUrl"
               name="videoUrl"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:mr-4 file:py-1 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-              value={course?.videoUrl}
+              defaultValue={course?.videoUrl}
             />
           </div>
         )}
