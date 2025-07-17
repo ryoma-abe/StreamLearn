@@ -21,6 +21,7 @@ export default function EditForm({ course }: EditFormProps) {
     const form = event.currentTarget;
     event.preventDefault(); // ページリロード防止
 
+    // PATCHリクエストなので、Jsonを送る
     const formData = {
       title: form.title,
       description: form.description.value,
