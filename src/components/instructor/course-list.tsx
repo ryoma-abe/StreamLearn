@@ -3,17 +3,7 @@ import { useEffect, useState } from "react";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { Button } from "../ui/button";
 import Link from "next/link";
-
-interface Course {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  thumbnailUrl: string | null;
-  videoUrl: string | null;
-  instructorId: string;
-  createdAt: Date;
-}
+import { Course } from "@prisma/client";
 
 export default function CourseList() {
   const [courses, setCourses] = useState<Course[]>([]);
