@@ -16,7 +16,7 @@ export default function EditForm({ course }: EditFormProps) {
   const [loading, setLoading] = useState(false);
 
   // 登録処理
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleEdit(event: React.FormEvent<HTMLFormElement>) {
     setLoading(true);
     const form = event.currentTarget;
     event.preventDefault(); // ページリロード防止
@@ -33,17 +33,14 @@ export default function EditForm({ course }: EditFormProps) {
       form.reset();
       setMarkdown("");
     }
-    setTimeout(() => {
-      setMessage(false);
-    }, 5000);
   }
   return (
     <>
       <SectionHeader title="教材編集" />
       {message && (
-        <p className="text-center p-10 my-10 bg-green-300">送信完了しました</p>
+        <p className="text-center p-10 my-10 bg-green-300">編集完了しました</p>
       )}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleEdit} className="space-y-4">
         <div>
           <label
             htmlFor="title"
@@ -111,7 +108,7 @@ export default function EditForm({ course }: EditFormProps) {
 
         <div className="pt-4 flex justify-center">
           <Button type="submit" className="max-w-[300] w-full">
-            {loading ? <LoadingSpinner /> : "投稿"}
+            {loading ? <LoadingSpinner /> : "更新する"}
           </Button>
         </div>
         {markdown && (
