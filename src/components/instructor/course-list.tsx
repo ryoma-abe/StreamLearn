@@ -26,7 +26,14 @@ export default function CourseList() {
   }, []);
 
   // 削除処理
-  const deleteCourse = () => {};
+  const deleteCourse = async (id: string) => {
+    const res = await fetch(`/api/courses/course/${id}`, {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      alert("Ok");
+    }
+  };
   if (loading) return <LoadingSpinner />;
 
   return (
@@ -49,7 +56,10 @@ export default function CourseList() {
               <Button asChild>
                 <Link href={`/courses/${course.id}/edit`}>編集する</Link>
               </Button>
-              <Button onClick={deleteCourse} variant={"secondary"}>
+              <Button
+                onClick={() => deleteCourse(course.id)}
+                variant={"secondary"}
+              >
                 削除する
               </Button>
             </div>
