@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { prisma } from "@/lib/prisma";
+import { getCourseById } from "@/lib/course";
 import Markdown from "react-markdown";
 
 export default async function CourseDetailPage({
@@ -7,9 +7,7 @@ export default async function CourseDetailPage({
 }: {
   params: { id: string };
 }) {
-  const course = await prisma.course.findUnique({
-    where: { id: params.id },
-  });
+  const course = await getCourseById(params.id);
 
   if (!course) {
     return (
