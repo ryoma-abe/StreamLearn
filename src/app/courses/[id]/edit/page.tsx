@@ -4,9 +4,10 @@ import { getCourseById } from "@/lib/course";
 export default async function EditCoursePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const course = await getCourseById(params.id);
+  const { id } = await params;
+  const course = await getCourseById(id);
 
   return <EditForm course={course} />;
 }
