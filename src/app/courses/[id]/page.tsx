@@ -5,9 +5,10 @@ import Markdown from "react-markdown";
 export default async function CourseDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const course = await getCourseById(params.id);
+  const { id } = await params;
+  const course = await getCourseById(id);
 
   if (!course) {
     return (
